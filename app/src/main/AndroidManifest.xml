@@ -19,6 +19,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".SplashActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/CustomTheme">
             <intent-filter>
