@@ -43,73 +43,46 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
         holder.textViewTemperature.setText(thisObject.getMain().getTemp() + Constants.TEMP_UNIT);
         switch (thisObject.getWeather().get(0).getIcon()) {
             case "01d":
-                holder.imageViewIcon.setImageResource(R.drawable.ic_weather_clear_sky);
-                holder.cardView.setBackgroundResource(R.color.color_clear_and_sunny);
-                break;
             case "01n":
                 holder.imageViewIcon.setImageResource(R.drawable.ic_weather_clear_sky);
                 holder.cardView.setBackgroundResource(R.color.color_clear_and_sunny);
                 break;
             case "02d":
-                holder.imageViewIcon.setImageResource(R.drawable.ic_weather_few_cloud);
-                holder.cardView.setBackgroundResource(R.color.color_partly_cloudy);
-                break;
             case "02n":
                 holder.imageViewIcon.setImageResource(R.drawable.ic_weather_few_cloud);
                 holder.cardView.setBackgroundResource(R.color.color_partly_cloudy);
                 break;
             case "03d":
-                holder.imageViewIcon.setImageResource(R.drawable.ic_weather_scattered_clouds);
-                holder.cardView.setBackgroundResource(R.color.color_gusty_winds);
-                break;
             case "03n":
                 holder.imageViewIcon.setImageResource(R.drawable.ic_weather_scattered_clouds);
                 holder.cardView.setBackgroundResource(R.color.color_gusty_winds);
                 break;
             case "04d":
-                holder.imageViewIcon.setImageResource(R.drawable.ic_weather_broken_clouds);
-                holder.cardView.setBackgroundResource(R.color.color_cloudy_overnight);
-                break;
             case "04n":
                 holder.imageViewIcon.setImageResource(R.drawable.ic_weather_broken_clouds);
                 holder.cardView.setBackgroundResource(R.color.color_cloudy_overnight);
                 break;
             case "09d":
-                holder.imageViewIcon.setImageResource(R.drawable.ic_weather_shower_rain);
-                holder.cardView.setBackgroundResource(R.color.color_hail_storms);
-                break;
             case "09n":
                 holder.imageViewIcon.setImageResource(R.drawable.ic_weather_shower_rain);
                 holder.cardView.setBackgroundResource(R.color.color_hail_storms);
                 break;
             case "10d":
-                holder.imageViewIcon.setImageResource(R.drawable.ic_weather_rain);
-                holder.cardView.setBackgroundResource(R.color.color_heavy_rain);
-                break;
             case "10n":
                 holder.imageViewIcon.setImageResource(R.drawable.ic_weather_rain);
                 holder.cardView.setBackgroundResource(R.color.color_heavy_rain);
                 break;
             case "11d":
-                holder.imageViewIcon.setImageResource(R.drawable.ic_weather_thunderstorm);
-                holder.cardView.setBackgroundResource(R.color.color_thunderstorms);
-                break;
             case "11n":
                 holder.imageViewIcon.setImageResource(R.drawable.ic_weather_thunderstorm);
                 holder.cardView.setBackgroundResource(R.color.color_thunderstorms);
                 break;
             case "13d":
-                holder.imageViewIcon.setImageResource(R.drawable.ic_weather_snow);
-                holder.cardView.setBackgroundResource(R.color.color_snow);
-                break;
             case "13n":
                 holder.imageViewIcon.setImageResource(R.drawable.ic_weather_snow);
                 holder.cardView.setBackgroundResource(R.color.color_snow);
                 break;
             case "15d":
-                holder.imageViewIcon.setImageResource(R.drawable.ic_weather_mist);
-                holder.cardView.setBackgroundResource(R.color.color_mix_snow_and_rain);
-                break;
             case "15n":
                 holder.imageViewIcon.setImageResource(R.drawable.ic_weather_mist);
                 holder.cardView.setBackgroundResource(R.color.color_mix_snow_and_rain);
@@ -125,8 +98,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder
     private String getTime(Long milliTime) {
         Date currentDate = new Date(milliTime);
         SimpleDateFormat df = new SimpleDateFormat("E, dd.MM.yyyy - hh:mm a");
-        String date = df.format(currentDate);
-        return date;
+        return df.format(currentDate);
     }
 
     public static class CardViewHolder extends RecyclerView.ViewHolder {
