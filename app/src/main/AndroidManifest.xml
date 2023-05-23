@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
     <uses-feature android:name="android.hardware.location.gps"/>
@@ -19,8 +20,8 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".SplashActivity"
-            android:exported="false"
-            android:screenOrientation="portrait"
+            android:exported="true"
+            android:screenOrientation="fullSensor"
             android:theme="@style/CustomTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,17 +31,17 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:theme="@style/CustomTheme">
         </activity>
         <activity
             android:name=".SwipeRight5Days"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:theme="@style/CustomTheme">
         </activity>
         <activity
             android:name=".SwipeLeftSetting"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:theme="@style/CustomTheme">
         </activity>
     </application>

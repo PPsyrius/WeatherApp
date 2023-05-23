@@ -1,19 +1,17 @@
 package com.androdocs.weatherapp;
 
-import android.content.DialogInterface;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.Context;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
 import android.text.InputType;
-import android.view.View;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.ToggleButton;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.androdocs.weatherapp.Gestures.OnSwipeTouchListener;
@@ -65,19 +63,15 @@ public class SwipeLeftSetting extends AppCompatActivity {
         input.setMaxLines(1);
         input.setSingleLine(true);
         alert.setView(input);
-        alert.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-                String result = input.getText().toString();
-                if (!result.isEmpty()) {
-                    System.out.println(result);
-                    Constants.CITY = result;
-                }
+        alert.setPositiveButton(R.string.ok, (dialog, whichButton) -> {
+            String result = input.getText().toString();
+            if (!result.isEmpty()) {
+                System.out.println(result);
+                Constants.CITY = result;
             }
         });
-        alert.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-                // Cancelled
-            }
+        alert.setNegativeButton(R.string.cancel, (dialog, whichButton) -> {
+            // Cancelled
         });
         alert.show();
     }
@@ -93,72 +87,59 @@ public class SwipeLeftSetting extends AppCompatActivity {
 
         ImpSwitch =  findViewById(R.id.ImperialSwitch);
         ImpSwitch.setChecked(sharedPrefs.getBoolean("UnitPrefImp", false));
-        ImpSwitch.setOnCheckedChangeListener( new CompoundButton.OnCheckedChangeListener(){
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked) {
-                    Constants.UNIT = "imperial";
-                    SharedPreferences.Editor editor = getSharedPreferences("com.androdocs.weatherapp", MODE_PRIVATE).edit();
-                    editor.putBoolean("UnitPrefImp", true);
-                    editor.apply();
-                }
-                else {
-                    Constants.UNIT = "metric";
-                    SharedPreferences.Editor editor = getSharedPreferences("com.androdocs.weatherapp", MODE_PRIVATE).edit();
-                    editor.putBoolean("UnitPrefImp", false);
-                    editor.apply();
-                }
+        ImpSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if(isChecked) {
+                Constants.UNIT = "imperial";
+                SharedPreferences.Editor editor = getSharedPreferences("com.androdocs.weatherapp", MODE_PRIVATE).edit();
+                editor.putBoolean("UnitPrefImp", true);
+                editor.apply();
+            }
+            else {
+                Constants.UNIT = "metric";
+                SharedPreferences.Editor editor = getSharedPreferences("com.androdocs.weatherapp", MODE_PRIVATE).edit();
+                editor.putBoolean("UnitPrefImp", false);
+                editor.apply();
             }
         });
         ThaiSwitch =  findViewById(R.id.ThaiLanguageSwitch);
         ThaiSwitch.setChecked(sharedPrefs.getBoolean("LanguagePrefThai", false));
-        ThaiSwitch.setOnCheckedChangeListener( new CompoundButton.OnCheckedChangeListener(){
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked) {
-                    Constants.LANGUAGE = "THAI";
-                    SharedPreferences.Editor editor = getSharedPreferences("com.androdocs.weatherapp", MODE_PRIVATE).edit();
-                    editor.putBoolean("LanguagePrefThai", true);
-                    editor.apply();
-                }
-                else {
-                    Constants.LANGUAGE = "ENGLISH";
-                    SharedPreferences.Editor editor = getSharedPreferences("com.androdocs.weatherapp", MODE_PRIVATE).edit();
-                    editor.putBoolean("LanguagePrefThai", false);
-                    editor.apply();
-                }
+        ThaiSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if(isChecked) {
+                Constants.LANGUAGE = "THAI";
+                SharedPreferences.Editor editor = getSharedPreferences("com.androdocs.weatherapp", MODE_PRIVATE).edit();
+                editor.putBoolean("LanguagePrefThai", true);
+                editor.apply();
+            }
+            else {
+                Constants.LANGUAGE = "ENGLISH";
+                SharedPreferences.Editor editor = getSharedPreferences("com.androdocs.weatherapp", MODE_PRIVATE).edit();
+                editor.putBoolean("LanguagePrefThai", false);
+                editor.apply();
             }
         });
         ButtonCurLoc = findViewById(R.id.ButtonCurrentLocation);
-        ButtonCurLoc.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Geocoder gcd = new Geocoder(getBaseContext(), Locale.getDefault());
-                List<Address> addresses = null;
-                try {
-                    addresses = gcd.getFromLocation(latitude, longitude, 1);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                if (addresses.size() > 0) {
-                    LocName = addresses.get(0).getLocality(); //+","+addresses.get(0).getCountryCode();
-                    System.out.println(LocName);
+        ButtonCurLoc.setOnClickListener(v -> {
+            Geocoder gcd = new Geocoder(getBaseContext(), Locale.getDefault());
+            List<Address> addresses = null;
+            try {
+                addresses = gcd.getFromLocation(latitude, longitude, 1);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            assert addresses != null;
+            if (addresses.size() > 0) {
+                LocName = addresses.get(0).getLocality(); //+","+addresses.get(0).getCountryCode();
+                System.out.println(LocName);
 
-                    if (LocName != null) Constants.CITY = LocName;
-                }
-                else {
-                    //Placeholder Text until the System is fixed
-                    System.out.println("Placeholder Location, please remove this on release");
-                    Constants.CITY = "Lat Krabang,th";
-                }
+                if (LocName != null) Constants.CITY = LocName;
+            }
+            else {
+                //Placeholder Text until the System is fixed
+                System.out.println("Placeholder Location, please remove this on release");
+                Constants.CITY = "Lat Krabang,th";
             }
         });
         ButtonManLoc = findViewById(R.id.ButtonManualLocation);
-        ButtonManLoc.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                searchByCityName();
-            }
-        });
+        ButtonManLoc.setOnClickListener(v -> searchByCityName());
     }
 }

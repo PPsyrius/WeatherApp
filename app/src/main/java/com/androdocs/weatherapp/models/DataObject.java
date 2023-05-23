@@ -12,7 +12,7 @@ public class DataObject {
     private com.androdocs.weatherapp.models.Main main;
     @SerializedName("weather")
     @Expose
-    private java.util.List<com.androdocs.weatherapp.models.Weather> weather = null;
+    private final java.util.List<com.androdocs.weatherapp.models.Weather> weather = null;
     @SerializedName("wind")
     @Expose
     private com.androdocs.weatherapp.models.Wind wind;

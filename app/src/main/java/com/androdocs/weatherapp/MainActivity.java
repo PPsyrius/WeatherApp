@@ -2,7 +2,6 @@ package com.androdocs.weatherapp;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
@@ -26,6 +25,7 @@ import org.json.JSONObject;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
     TextView addressTxt, updated_atTxt, statusTxt, tempTxt, temp_minTxt, temp_maxTxt, sunriseTxt,
@@ -58,8 +58,6 @@ public class MainActivity extends AppCompatActivity {
                 "<p>Developed by 61090020 610900023</p>" +
                 "<p>Data provided by <a href='https://openweathermap.org/'>OpenWeatherMap</a>, under the <a href='http://creativecommons.org/licenses/by-sa/2.0/'>Creative Commons License</a>";
         TypedArray ta = obtainStyledAttributes(new int[]{android.R.attr.textColorPrimary, android.R.attr.colorAccent});
-        String textColor = String.format("#%06X", (0xFFFFFF & ta.getColor(0, Color.BLACK)));
-        String accentColor = String.format("#%06X", (0xFFFFFF & ta.getColor(1, Color.BLUE)));
         ta.recycle();
         about = "<style media=\"screen\" type=\"text/css\">" +
                 "body {\n" +
@@ -71,10 +69,8 @@ public class MainActivity extends AppCompatActivity {
         webView.setBackgroundColor(Color.TRANSPARENT);
         webView.loadData(about, "text/html", "UTF-8");
         alert.setView(webView);
-        alert.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
+        alert.setPositiveButton(R.string.ok, (dialog, whichButton) -> {
 
-            }
         });
         alert.show();
     }
@@ -115,8 +111,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         protected String doInBackground(String... args) {
-            String response = HttpRequest.excuteGet("https://api.openweathermap.org/data/2.5/weather?q=" + Constants.CITY + "&units=" + Constants.UNIT + "&appid=" + Constants.API_KEY);
-            return response;
+            return HttpRequest.excuteGet("https://api.openweathermap.org/data/2.5/weather?q=" + Constants.CITY + "&units=" + Constants.UNIT + "&appid=" + Constants.API_KEY);
         }
 
         @Override
@@ -128,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
                 JSONObject wind = jsonObj.getJSONObject("wind");
                 JSONObject weather = jsonObj.getJSONArray("weather").getJSONObject(0);
 
-                Long updatedAt = jsonObj.getLong("dt");
+                long updatedAt = jsonObj.getLong("dt");
                 String updatedAtText = "Updated at: " + new SimpleDateFormat("dd/MM/yyyy hh:mm a", Locale.ENGLISH).format(new Date(updatedAt * 1000));
                 String temp = main.getString("temp") + DegreeUnit;
                 String tempMin = "Min Temp: " + main.getString("temp_min") + DegreeUnit;
@@ -136,8 +131,8 @@ public class MainActivity extends AppCompatActivity {
                 String pressure = main.getString("pressure") + " a";
                 String humidity = main.getString("humidity") + "%";
 
-                Long sunrise = sys.getLong("sunrise");
-                Long sunset = sys.getLong("sunset");
+                long sunrise = sys.getLong("sunrise");
+                long sunset = sys.getLong("sunset");
                 String windSpeed = wind.getString("speed") + " " + WindUnit;
                 String weatherDescription = weather.getString("description");
 
@@ -193,20 +188,15 @@ public class MainActivity extends AppCompatActivity {
         //Metric-Imperial
         Resources res = getResources();
         String[] tempUnitArray= res.getStringArray(R.array.temperature_degree);
-        if(Constants.UNIT=="metric"){ DegreeUnit = tempUnitArray[0]; }
+        if(Objects.equals(Constants.UNIT, "metric")){ DegreeUnit = tempUnitArray[0]; }
         else{ DegreeUnit = tempUnitArray[1]; }
 
         String[] windUnitArray= res.getStringArray(R.array.wind_degree);
-        if(Constants.UNIT=="metric"){ WindUnit = windUnitArray[0]; }
+        if(Objects.equals(Constants.UNIT, "metric")){ WindUnit = windUnitArray[0]; }
         else{ WindUnit = windUnitArray[1]; }
 
         //AboutDialog
         imgButton = findViewById(R.id.action_about);
-        imgButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showAboutDialog();
-            }
-        });
+        imgButton.setOnClickListener(v -> showAboutDialog());
     }
 }

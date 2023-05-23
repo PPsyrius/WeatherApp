@@ -1,21 +1,18 @@
 package com.androdocs.weatherapp;
 
-import android.content.Context;
-import android.content.Intent;
-import android.content.res.Resources;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.RelativeLayout;
-import androidx.appcompat.app.AppCompatActivity;
-
-//Legacy
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.res.Resources;
 import android.location.LocationManager;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.widget.RelativeLayout;
 import android.widget.TabHost;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -33,6 +30,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import retrofit2.Call;
@@ -81,11 +79,11 @@ public class SwipeRight5Days extends AppCompatActivity {
         //Metric-Imperial
         Resources res = getResources();
         String[] tempUnitArray= res.getStringArray(R.array.temperature_degree);
-        if(Constants.UNIT=="metric"){ DegreeUnit = tempUnitArray[0]; }
+        if(Objects.equals(Constants.UNIT, "metric")){ DegreeUnit = tempUnitArray[0]; }
         else{ DegreeUnit = tempUnitArray[1]; }
 
         String[] windUnitArray= res.getStringArray(R.array.wind_degree);
-        if(Constants.UNIT=="metric"){ WindUnit = windUnitArray[0]; }
+        if(Objects.equals(Constants.UNIT, "metric")){ WindUnit = windUnitArray[0]; }
         else{ WindUnit = windUnitArray[1]; }
 
         //Temp Unit
@@ -166,8 +164,7 @@ public class SwipeRight5Days extends AppCompatActivity {
     private String getDate(Long milliTime) {
         Date currentDate = new Date(milliTime);
         SimpleDateFormat df = new SimpleDateFormat("dd");
-        String date = df.format(currentDate);
-        return date;
+        return df.format(currentDate);
     }
 
     private void getWeather(StringBuilder addressStringBuilder) {
@@ -175,7 +172,7 @@ public class SwipeRight5Days extends AppCompatActivity {
         Call<Forecast> call = Utility.getApis().getWeatherForecastData(addressStringBuilder, Constants.API_KEY, Constants.UNIT);
         call.enqueue(new Callback<Forecast>() {
             @Override
-            public void onResponse(Call<Forecast> call, Response<Forecast> response) {
+            public void onResponse(@NonNull Call<Forecast> call, @NonNull Response<Forecast> response) {
                 progressDialog.dismiss();
                 if (response.isSuccessful()) {
                     Log.i(TAG, "onResponse: " + response.isSuccessful());
@@ -219,7 +216,7 @@ public class SwipeRight5Days extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<Forecast> call, Throwable t) {
+            public void onFailure(@NonNull Call<Forecast> call, @NonNull Throwable t) {
                 progressDialog.dismiss();
                 Log.e(TAG, "onFailure: " + t.getMessage());
                 Toast.makeText(SwipeRight5Days.this, getString(R.string.msg_failed), Toast.LENGTH_SHORT).show();
