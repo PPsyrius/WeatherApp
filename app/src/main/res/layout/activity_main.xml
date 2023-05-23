@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -102,8 +103,9 @@
                     <ImageView
                         android:layout_width="25dp"
                         android:layout_height="25dp"
-                        android:src="@drawable/sunrise"
-                        android:tint="#FFFFFF"/>
+                        app:srcCompat="@drawable/sunrise"
+                        app:tint="#FFFFFF"
+                        android:contentDescription="@string/sunrise" />
                     <Space
                         android:layout_width="wrap_content"
                         android:layout_height="5dp"/>
@@ -133,8 +135,9 @@
                     <ImageView
                         android:layout_width="25dp"
                         android:layout_height="25dp"
-                        android:src="@drawable/sunset"
-                        android:tint="#FFFFFF"/>
+                        app:srcCompat="@drawable/sunset"
+                        app:tint="#FFFFFF"
+                        android:contentDescription="@string/sunset" />
                     <Space
                         android:layout_width="wrap_content"
                         android:layout_height="5dp"/>
@@ -164,8 +167,9 @@
                     <ImageView
                         android:layout_width="25dp"
                         android:layout_height="25dp"
-                        android:src="@drawable/wind"
-                        android:tint="#FFFFFF"/>
+                        app:srcCompat="@drawable/wind"
+                        app:tint="#FFFFFF"
+                        android:contentDescription="@string/wind" />
                     <Space
                         android:layout_width="wrap_content"
                         android:layout_height="5dp"/>
@@ -203,8 +207,9 @@
                     <ImageView
                         android:layout_width="25dp"
                         android:layout_height="25dp"
-                        android:src="@drawable/pressure"
-                        android:tint="#FFFFFF"/>
+                        app:srcCompat="@drawable/pressure"
+                        app:tint="#FFFFFF"
+                        android:contentDescription="@string/pressure" />
                     <Space
                         android:layout_width="wrap_content"
                         android:layout_height="5dp"/>
@@ -234,8 +239,9 @@
                     <ImageView
                         android:layout_width="25dp"
                         android:layout_height="25dp"
-                        android:src="@drawable/humidity"
-                        android:tint="#FFFFFF"/>
+                        app:srcCompat="@drawable/humidity"
+                        app:tint="#FFFFFF"
+                        android:contentDescription="@string/humidity" />
                     <Space
                         android:layout_width="wrap_content"
                         android:layout_height="5dp"/>
@@ -266,8 +272,9 @@
                         android:id="@+id/action_about"
                         android:layout_width="25dp"
                         android:layout_height="25dp"
-                        android:src="@drawable/info"
-                        android:tint="#FFFFFF"/>
+                        app:srcCompat="@drawable/info"
+                        app:tint="#FFFFFF"
+                        android:contentDescription="@string/info" />
                     <Space
                         android:layout_width="wrap_content"
                         android:layout_height="5dp"/>

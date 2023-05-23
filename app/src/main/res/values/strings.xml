@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Weather App</string>
     <string name="version">Version</string>
-    <string name="ok">Ok</string>
+    <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
     <string name="progress">Loading..</string>
     <string name="something_gone_wrong">Something went wrong</string>
@@ -77,4 +77,11 @@
     <string name="pressure_unit">hPa</string>
     <string name="humidity_lable">humidity:</string>
     <string name="humidity_unit">%</string>
+    <string name="sunrise">Sunrise</string>
+    <string name="sunset">Sunset</string>
+    <string name="wind">Wind</string>
+    <string name="pressure">Pressure</string>
+    <string name="humidity">Humidity</string>
+    <string name="info">Info</string>
+    <string name="weather_icon">Weather Icon</string>
 </resources>
