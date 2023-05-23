@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         String about = "<p>Weather App</p>" +
                 "<p>Developed by 61090020 610900023</p>" +
                 "<p>Data provided by <a href='https://openweathermap.org/'>OpenWeatherMap</a>, under the <a href='http://creativecommons.org/licenses/by-sa/2.0/'>Creative Commons License</a>";
-        TypedArray ta = obtainStyledAttributes(new int[]{android.R.attr.textColorPrimary, R.attr.colorAccent});
+        TypedArray ta = obtainStyledAttributes(new int[]{android.R.attr.textColorPrimary, android.R.attr.colorAccent});
         String textColor = String.format("#%06X", (0xFFFFFF & ta.getColor(0, Color.BLACK)));
         String accentColor = String.format("#%06X", (0xFFFFFF & ta.getColor(1, Color.BLUE)));
         ta.recycle();
